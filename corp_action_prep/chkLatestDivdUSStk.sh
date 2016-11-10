@@ -12,7 +12,7 @@ TMPFILE1=/tmp/rf_backup_$(whoami)/tmp_chkLatestDivdUSStk_1
 TMPFILE2=/tmp/rf_backup_$(whoami)/tmp_chkLatestDivdUSStk_2
 TMPFILE3=/tmp/rf_backup_$(whoami)/tmp_chkLatestDivdUSStk_3
 
-SYMBOLLIST=$(cat $PATHTOPDNCONFIG | grep SymbolsToBe | awk -F= '{print $2}' | tr ',' ' ' | tr '[:upper:]' '[:lower:]')
+SYMBOLLIST=$(cat $PATHTOPDNCONFIG | grep SubscriptionSymbols | awk -F= '{print $2}' | tr ',' ' ' | tr '[:upper:]' '[:lower:]')
 
 rm -f $ALLCORPACTIONFILE
 touch $ALLCORPACTIONFILE
@@ -53,6 +53,6 @@ cat $TMPFILE1 > $ALLCORPACTIONFILE
 ###################################################
 # replace -- with previous value
 ###################################################
-$REPLACEUNKWNWITHPREVPROG $ALLCORPACTIONFILE > $ALLCORPACTIONFILE2
+$REPLACEUNKWNWITHPREVPROG $ALLCORPACTIONFILE | uniq > $ALLCORPACTIONFILE2
 
 rm -f $TMPFILE1 $TMPFILE2 $TMPFILE3
